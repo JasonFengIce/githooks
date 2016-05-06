@@ -25,9 +25,7 @@ email.setFrom("fenghuibin@ismartv.cn");
 email.setSubject("subject");
 email.setMsg(emailMsg);
 email.addTo("fenghuibin@ismartv.cn");
-=begin
 email.send();
-=end
 
 
 
