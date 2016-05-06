@@ -13,6 +13,9 @@ frame.pack()
 frame.setVisible(true)
 frame.visible = true
 
+
+emailMsg=`git log master ^origin/master`
+
 email = MultiPartEmail.new()
 email.setHostName("smtp.qiye.163.com");
 email.setSslSmtpPort("25");
@@ -20,9 +23,14 @@ email.setAuthenticator(DefaultAuthenticator.new("fenghuibin@ismartv.cn", "Hope0D
 email.setSSLOnConnect(true);
 email.setFrom("fenghuibin@ismartv.cn");
 email.setSubject("subject");
-email.setMsg("msg from ruby");
+email.setMsg(emailMsg);
 email.addTo("fenghuibin@ismartv.cn");
+=begin
 email.send();
+=end
+
+
+
 
 
 
