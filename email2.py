@@ -12,11 +12,10 @@ mailto_list = ["fenghuibin@ismartv.cn"]
 mail_host = "smtp.qiye.163.com"  # 设置服务器
 mail_user = "fenghuibin@ismartv.cn"  # 用户名
 mail_pass = "Hope0Dies"  # 口令
-mail_postfix = "ismartv.cn"  # 发件箱的后缀
 
 
 def send_mail(to_list, sub, content):  # to_list：收件人；sub：主题；content：邮件内容
-    me = "hello" + "<" + mail_user + "@" + mail_postfix + ">"  # 这里的hello可以任意设置，收到信后，将按照设置显示
+    me = "hello" + "<" + mail_user + ">"  # 这里的hello可以任意设置，收到信后，将按照设置显示
     msg = MIMEText(content, _subtype='html', _charset='gb2312')  # 创建一个实例，这里设置为html格式邮件
     msg['Subject'] = sub  # 设置主题
     msg['From'] = me
@@ -34,7 +33,7 @@ def send_mail(to_list, sub, content):  # to_list：收件人；sub：主题；co
 
 
 if __name__ == '__main__':
-    gitLog = commands.getoutput('git log')
+    gitLog = commands.getoutput("git log --pretty=format:'%h  ====>  %s'  master ^origin/master")
 
     if send_mail(mailto_list, "hello", gitLog):
         print "发送成功"
