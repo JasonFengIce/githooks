@@ -38,7 +38,6 @@ def get_current_branch():
             return branch
 
 
-
 if __name__ == '__main__':
     gitLog = commands.getoutput("git log --pretty=format:'%h  ====>  %s'  python ^origin/python")
     gitLog += "\r\n\r\n"
