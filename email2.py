@@ -33,7 +33,7 @@ def send_mail(to_list, sub, content):  # to_list：收件人；sub：主题；co
 
 
 if __name__ == '__main__':
-    gitLog = commands.getoutput("git log --pretty=format:'%h  ====>  %s'  master ^origin/master")
+    gitLog = commands.getoutput("git log --pretty=format:'%h  ====>  %s'  python ^origin/python")
 
     if send_mail(mailto_list, "hello", gitLog):
         print "发送成功"
