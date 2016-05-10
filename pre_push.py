@@ -1,12 +1,12 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# !/usr/bin/env python
+
 import commands
 import smtplib
 
 from email.mime.text import MIMEText
 
-mailto_list = ["zhengwenkai@ismartv.cn", "zhangshaoqing@ismartv.cn",
-               "pengzonghu@ismartv.cn", "jiazhaobin@ismartv.cn",
+mailto_list = ["zhengwenkai@ismartv.cn", "zhangshaoqing@ismartv.cn", "pengzonghu@ismartv.cn", "jiazhaobin@ismartv.cn",
                "stonewang@ismartv.cn", "zhangtianxi@ismartv.cn"]
 mail_host = "smtp.qiye.163.com"  # 设置服务器
 mail_user = "fenghuibin@ismartv.cn"  # 用户名
@@ -14,7 +14,7 @@ mail_pass = "Hope0Dies"  # 口令
 
 
 def send_mail(to_list, sub, content):  # to_list：收件人；sub：主题；content：邮件内容
-    me = "hello" + "<" + mail_user + ">"  # 这里的hello可以任意设置，收到信后，将按照设置显示
+    me = mail_user + "<" + mail_user + ">"  # 这里的hello可以任意设置，收到信后，将按照设置显示
     msg = MIMEText(content, _charset='utf8')  # 创建一个实例，这里设置为html格式邮件
     msg['Subject'] = sub  # 设置主题
     msg['From'] = me
@@ -36,13 +36,16 @@ def get_current_branch():
     branch_list = branch_list.split("\n")
     for branch in branch_list:
         if branch.__contains__("*"):
-            return branch
+            return branch.replace("*", "").strip()
 
 
 if __name__ == '__main__':
-    gitLog = commands.getoutput("git log --pretty=format:'%h  ====>  %s'  python ^origin/python")
+    current_branch = get_current_branch()
+    com = "git log " + current_branch + " ^origin/" + current_branch + " --pretty=format:'%h  ====>  %s'"
+    print com
+    gitLog = commands.getoutput(com)
     gitLog += "\r\n\r\n"
-    gitLog += "git branch: " + get_current_branch()
+    gitLog += "git branch: " + current_branch
     print gitLog
 
     if send_mail(mailto_list, "视云语音客户端更新", gitLog):
