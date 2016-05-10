@@ -4,7 +4,9 @@ import smtplib
 
 from email.mime.text import MIMEText
 
-mailto_list = ["fenghuibin@ismartv.cn"]
+mailto_list = ["zhengwenkai@ismartv.cn", "zhangshaoqing@ismartv.cn",
+               "pengzonghu@ismartv.cn", "jiazhaobin@ismartv.cn",
+               "stonewang@ismartv.cn", "zhangtianxi@ismartv.cn"]
 mail_host = "smtp.qiye.163.com"  # 设置服务器
 mail_user = "fenghuibin@ismartv.cn"  # 用户名
 mail_pass = "Hope0Dies"  # 口令
@@ -42,7 +44,7 @@ if __name__ == '__main__':
     gitLog += "git branch: " + get_current_branch()
     print gitLog
 
-    if send_mail(mailto_list, "hello", gitLog):
+    if send_mail(mailto_list, "视云语音客户端更新", gitLog):
         print "发送成功"
     else:
         print "发送失败"
