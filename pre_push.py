@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-'''
-发送html文本邮件
-小五义：http://www.cnblogs.com/xiaowuyi
-'''
 import commands
 import smtplib
 
@@ -16,7 +12,7 @@ mail_pass = "Hope0Dies"  # 口令
 
 def send_mail(to_list, sub, content):  # to_list：收件人；sub：主题；content：邮件内容
     me = "hello" + "<" + mail_user + ">"  # 这里的hello可以任意设置，收到信后，将按照设置显示
-    msg = MIMEText(content, _subtype='html', _charset='gb2312')  # 创建一个实例，这里设置为html格式邮件
+    msg = MIMEText(content, _charset='utf8')  # 创建一个实例，这里设置为html格式邮件
     msg['Subject'] = sub  # 设置主题
     msg['From'] = me
     msg['To'] = ";".join(to_list)
@@ -32,8 +28,19 @@ def send_mail(to_list, sub, content):  # to_list：收件人；sub：主题；co
         return False
 
 
+def get_current_branch():
+    branch_list = commands.getoutput("git branch")
+    branch_list = branch_list.split("\n")
+    for branch in branch_list:
+        if branch.__contains__("*"):
+            return branch
+
+
 if __name__ == '__main__':
     gitLog = commands.getoutput("git log --pretty=format:'%h  ====>  %s'  python ^origin/python")
+    gitLog += "\r\n\r\n"
+    gitLog += "git branch: " + get_current_branch()
+    print gitLog
 
     if send_mail(mailto_list, "hello", gitLog):
         print "发送成功"
