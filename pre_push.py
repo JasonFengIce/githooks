@@ -10,7 +10,7 @@ mailto_list = ["zhengwenkai@ismartv.cn", "zhangshaoqing@ismartv.cn", "pengzonghu
                "stonewang@ismartv.cn", "zhangtianxi@ismartv.cn"]
 mail_host = "smtp.qiye.163.com"  # 设置服务器
 mail_user = "fenghuibin@ismartv.cn"  # 用户名
-mail_pass = "Hope0Dies"  # 口令
+mail_pass = "****"  # 口令
 
 
 def send_mail(to_list, sub, content):  # to_list：收件人；sub：主题；content：邮件内容
